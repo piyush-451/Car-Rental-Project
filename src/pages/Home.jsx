@@ -7,13 +7,13 @@ import { Container, Row, Col } from "reactstrap";
 import FindCarForm from "../components/UI/FindCarForm";
 import AboutSection from "../components/UI/AboutSection";
 import ServicesList from "../components/UI/ServicesList";
-import carData from "../assets/data/carData";
 import CarCarousal from "../components/UI/CarCarousal";
+import Benifits from "../components/UI/Benifits";
 import ReserveCarSection from "../components/UI/ReserveCarSection";
 import Testimonial from "../components/UI/Testimonial";
-
 import BlogList from "../components/UI/BlogList";
 
+import carData from "../assets/data/carData";
 
 const Home = () => {
   return (
@@ -53,11 +53,12 @@ const Home = () => {
           </Row>
         </Container>
       </section>
+
       {/* =========== car offer section ============= */}
-      <CarCarousal
-        CarData = {carData}
-        />
-      
+      <CarCarousal CarData={carData} />
+
+      {/* =============== why chooses us section========== */}
+      <Benifits/>
       {/* =========== Reserve car section ============ */}
       <ReserveCarSection />
 

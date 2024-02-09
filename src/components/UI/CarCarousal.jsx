@@ -10,7 +10,6 @@ const CarCarousal = ({ CarData }) => {
     newCarData.push(CarData.slice(i, i + itemsPerRow));
   }
 
-  console.log(newCarData);
 
   const settings = {
     dots: true,
