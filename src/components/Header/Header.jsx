@@ -1,5 +1,4 @@
 import React, { useRef } from "react";
-
 import { Container } from "reactstrap";
 import { Link , NavLink } from "react-router-dom";
 import "../../styles/header.css";
@@ -49,7 +48,6 @@ const Header = () => {
         <Container>
           <div className="navigation__wrapper d-flex align-items-center">
             <div className="navbar__logo">
-            {console.log(__dirname)}
               <Link to='/home'><img src={logo} width={"80px"} alt="Logo" /></Link>
             </div>
 

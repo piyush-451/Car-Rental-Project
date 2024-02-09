@@ -8,11 +8,12 @@ import FindCarForm from "../components/UI/FindCarForm";
 import AboutSection from "../components/UI/AboutSection";
 import ServicesList from "../components/UI/ServicesList";
 import carData from "../assets/data/carData";
-import CarItem from "../components/UI/CarItem";
+import CarCarousal from "../components/UI/CarCarousal";
 import ReserveCarSection from "../components/UI/ReserveCarSection";
 import Testimonial from "../components/UI/Testimonial";
 
 import BlogList from "../components/UI/BlogList";
+
 
 const Home = () => {
   return (
@@ -53,20 +54,10 @@ const Home = () => {
         </Container>
       </section>
       {/* =========== car offer section ============= */}
-      <section>
-        <Container>
-          <Row>
-            <Col lg="12" className="text-center mb-5">
-              <h6 className="section__subtitle">Come with</h6>
-              <h2 className="section__title">Hot Offers</h2>
-            </Col>
-
-            {carData.slice(0, 6).map((item) => (
-              <CarItem item={item} key={item.id} />
-            ))}
-          </Row>
-        </Container>
-      </section>
+      <CarCarousal
+        CarData = {carData}
+        />
+      
       {/* =========== Reserve car section ============ */}
       <ReserveCarSection />
 
