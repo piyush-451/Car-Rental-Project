@@ -1,9 +1,9 @@
 import React, { useRef } from "react";
 
 import { Container } from "reactstrap";
-import { NavLink } from "react-router-dom";
+import { Link , NavLink } from "react-router-dom";
 import "../../styles/header.css";
-
+import logo from '../../assets/all-images/BMTT-LOGO-4.png';
 import EventIcon from "@mui/icons-material/Event";
 
 const navLinks = [
@@ -49,7 +49,8 @@ const Header = () => {
         <Container>
           <div className="navigation__wrapper d-flex align-items-center">
             <div className="navbar__logo">
-              <img src="./logo512.png" width={"70px"} alt="Logo" />
+            {console.log(__dirname)}
+              <Link to='/home'><img src={logo} width={"80px"} alt="Logo" /></Link>
             </div>
 
             <div className="right__wrapper"></div>
@@ -59,7 +60,6 @@ const Header = () => {
                   <NavLink
                     to={item.path}
                     className={(navClass) => {
-                      console.log(navClass);
                       return navClass.isActive
                         ? "nav__active nav__item"
                         : "nav__item";

@@ -4,7 +4,8 @@
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  padding: 65px 35px;
+  padding: 80px 35px;
+  margin-left: -12px;
 }
 
 .find__cars-left h2 {
@@ -13,8 +14,10 @@
 }
 
 .form__group {
-  width: 30%;
+  width: 49%;
   margin-bottom: 0;
+  display: flex;
+  align-items: center;
 }
 
 .form__group input {
@@ -26,6 +29,24 @@
 }
 .form__group input::placeholder {
   color: #7c8a97;
+}
+
+.form__group select {
+  /* color: #7c8a97; */
+  border: 1px solid #80a4c62a;
+  padding: 8px 12px;
+
+  width: 100%;
+  outline: none;
+}
+
+.form__label{
+  width: 50%;
+  min-width: 70px;
+  padding: 5px;
+  background-color: #efe9e9;
+  font-size: 1rem;
+  font-weight: 400;
 }
 
 .form {
@@ -83,7 +104,7 @@
 
 @media only screen and (max-width: 992px) {
   .find__cars-left {
-    padding: 65px 22px;
+    padding: 100px 22px;
   }
 
   .find__cars-left h2 {
@@ -91,7 +112,7 @@
   }
 
   .form {
-    padding: 30px 10px;
+    padding: 15px 10px;
   }
 
   .form__group input,
