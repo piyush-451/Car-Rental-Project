@@ -1,6 +1,7 @@
 import React from "react";
 import "../../styles/reserve-car.css";
 import { Container, Row, Col } from "reactstrap";
+import { Link } from "react-router-dom";
 
 import driverImg from "../../assets/all-images/toyota-offer-2.png";
 
@@ -27,9 +28,9 @@ const ReserveCarSection = () => {
               year.
             </p>
 
-            <button className="btn reserve__car-btn mt-4">
-              Reserve Now
-            </button>
+            <Link to="/cars">
+              <button className="btn mt-4">Reserve Now</button>
+            </Link>
           </Col>
         </Row>
       </Container>

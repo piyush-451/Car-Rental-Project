@@ -1,6 +1,9 @@
 import img1 from "../all-images/project-img/img1.png"
 import img2 from "../all-images/project-img/img2.png"
 import img3 from "../all-images/project-img/img3.png"
+import carImg1 from "../all-images/cars-img/bmw-offer.png"
+import carImg2 from "../all-images/cars-img/nissan-offer.png"
+import carImg3 from "../all-images/cars-img/mercedes-offer.png"
 
 const serviceData = [
   {
@@ -51,9 +54,9 @@ export default serviceData;
 export const BenifitsData = [
   {
     id: 1,
-    title: "Unmatched Quality",
+    title: "Local Taxi Service",
     img : img1,
-    desc: "With safety our utmost priority, we ensure our drivers are qualified and trained professionals who always abide by traffic rules and regulations.",
+    desc: "Baba Mahakal Tour and Travels is a local taxi service provider in Bhopal, offering transportation solutions to individuals and around the city.",
   },
 
   {
@@ -75,6 +78,30 @@ export const BenifitsData = [
     title: "Free Home Delivery",
     img : img3,
     desc: "You can rest assured knowing that our taxi service is reliable because we are available 24/7, 365 days a year at reasonable rates for everyone.",
+  },
+]
+
+
+export const ServiceSectionData = [
+  {
+    id: 1,
+    title: "Unmatched Quality",
+    img : carImg1,
+    desc: "With safety our utmost priority, we ensure our drivers are qualified and trained professionals who always abide by traffic rules and regulations.",
+  },
+
+  {
+    id: 2,
+    title: "Outstation Taxi Service",
+    img : carImg2,
+    desc: "Baba Mahakal Tour and Travels provide outstation taxi services in Bhopal. We offer transportation solutions for customers who need to travel from Bhopal to outstation destinations.",
+  },
+
+  {
+    id: 3,
+    title: "One Way Taxi Service",
+    img : carImg3,
+    desc: "Baba Mahakal Tour and Travels in Bhopal. We offer you reliable and convenient oneway taxi services. If you’re planning a family vacation,or just need a reliable mode of transportation.",
   },
 ]
 

@@ -57,9 +57,6 @@ const CarCarousal = ({ CarData }) => {
                 ))}
               </Row>
             ))}
-            {/* {CarData.map((item, index) => (
-                  <CarItem item={item} key={index} />
-                ))} */}
           </Slider>
         </Row>
       </Container>

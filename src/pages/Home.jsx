@@ -5,7 +5,7 @@ import Helmet from "../components/Helmet/Helmet";
 
 import { Container, Row, Col } from "reactstrap";
 import FindCarForm from "../components/UI/FindCarForm";
-import AboutSection from "../components/UI/AboutSection";
+import Welcome from "../components/UI/Welcome";
 import ServicesList from "../components/UI/ServicesList";
 import CarCarousal from "../components/UI/CarCarousal";
 import Benifits from "../components/UI/Benifits";
@@ -39,7 +39,7 @@ const Home = () => {
         </div>
       </section>
       {/* =========== about section ================ */}
-      <AboutSection />
+      <Welcome />
       {/* ========== services section ============ */}
       <section>
         <Container>
