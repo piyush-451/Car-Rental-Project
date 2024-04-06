@@ -1,14 +1,29 @@
-import React from "react";
+import React, { useRef } from "react";
 import "../../styles/find-car-form.css";
 import { Form, FormGroup } from "reactstrap";
 
 import CarRentalIcon from "@mui/icons-material/CarRental";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
-import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 
 const FindCarForm = () => {
+  const carRef = useRef(null);
+  const pickupRef = useRef(null);
+  const dropOffRef = useRef(null);
+  const pickUpDateTimeRef = useRef(null);
+  const dropOffDateTimeRef = useRef(null);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("Car:", carRef.current.value);
+    console.log("Pick-up:", pickupRef.current.value);
+    console.log("Drop-off:", dropOffRef.current.value);
+    console.log("Pick-Up DateTime:", pickUpDateTimeRef.current.value);
+    console.log("Drop-Off DateTime:", dropOffDateTimeRef.current.value);
+  };
+
   return (
-    <Form className="form">
+    <Form className="form" onSubmit={handleSubmit}>
       <div className=" d-flex align-items-center justify-content-between flex-wrap">
         <FormGroup className="form__group">
           <div className="form__label">
@@ -16,7 +31,7 @@ const FindCarForm = () => {
             <span>Car</span>
           </div>
           {/* <input type="text" placeholder="From address" required /> */}
-          <select name="product" id="SelectCarDropdown">
+          <select ref={carRef} name="product" id="SelectCarDropdown">
             <option value="" selected="selected" data-select2-id="2">
               Select Car
             </option>
@@ -39,8 +54,12 @@ const FindCarForm = () => {
             />
             <span>Pick-up</span>
           </div>
-          {/* <input type="text" placeholder="From address" required /> */}
-          <select name="pickup_loc" id="pickupLocDropdown" aria-hidden="true">
+          <select
+            ref={pickupRef}
+            name="pickup_loc"
+            id="pickupLocDropdown"
+            aria-hidden="true"
+          >
             <option value="" data-select2-id="4">
               Select Location
             </option>
@@ -76,7 +95,12 @@ const FindCarForm = () => {
             <span>Drop-of</span>
           </div>
           {/* <input type="text" placeholder="From address" required /> */}
-          <select name="pickup_loc" id="pickupLocDropdown" aria-hidden="true">
+          <select
+            ref={dropOffRef}
+            name="pickup_loc"
+            id="pickupLocDropdown"
+            aria-hidden="true"
+          >
             <option value="" data-select2-id="4">
               Select Location
             </option>
@@ -112,6 +136,7 @@ const FindCarForm = () => {
             <span>Pick-Up</span>
           </div>
           <input
+            ref={pickUpDateTimeRef}
             type="datetime-local"
             id="pickUpDateTime"
             name="pickUpDateTime"
@@ -126,6 +151,7 @@ const FindCarForm = () => {
             <span>Drop-Off</span>
           </div>
           <input
+            ref={dropOffDateTimeRef}
             type="datetime-local"
             id="dropOffDateTime"
             name="dropOffDateTime"

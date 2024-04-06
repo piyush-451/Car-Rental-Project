@@ -15,7 +15,7 @@ const navLinks = [
     display: "SERVICES",
   },
   {
-    path: "/home",
+    path: "/packages",
     display: "PACKAGES",
   },
   {
@@ -32,7 +32,7 @@ const navLinks = [
   },
 
   {
-    path: "/home",
+    path: "/account",
     display: "MY ACCOUNT",
   },
 ];
