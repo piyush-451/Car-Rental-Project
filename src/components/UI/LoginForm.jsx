@@ -1,11 +1,26 @@
 import React, {useState} from "react";
+import {GoogleAuthProvider, getAuth, signInWithPopup} from 'firebase/auth';
 
-const LoginForm = () => {
+const LoginForm = ({auth,setAuth}) => {
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
+  };
+
+  const loginWithGoogle = () => {
+    const auth = getAuth();
+    const provider = new GoogleAuthProvider();
+    signInWithPopup(auth,provider)
+      .then((userCred) => {
+        if(userCred){
+          setAuth(true);
+          window.localStorage.setItem('auth','true');
+        }
+      }).catch(error => {
+        console.log('Error Signing in:',error);
+      })
   };
 
   return (
@@ -52,6 +67,10 @@ const LoginForm = () => {
             Login
           </button>
         </div>
+        <div className="d-grid">
+          <button onClick={loginWithGoogle} className="btn btn-primary">Login With Google</button>
+        </div>
+        <br />
         <p className="forgot-password text-right">
           <a className="red" href="#">Lost your password?</a>
         </p>

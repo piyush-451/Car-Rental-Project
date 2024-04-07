@@ -21,7 +21,7 @@ const SidebarContent = [
   "LOGOUT",
 ];
 
-const Dashboard = () => {
+const Dashboard = ({auth,setAuth}) => {
   const [selectedItem, setSelectedItem] = useState(SidebarContent[0]);
 
   const handleItemClick = (item) => {
@@ -38,7 +38,7 @@ const Dashboard = () => {
         />
         </Col>
         <Col lg="7" md="7" sm="12">
-        <MainContent selectedItem={selectedItem} />
+        <MainContent selectedItem={selectedItem} auth={auth} setAuth={setAuth}/>
         </Col>
       </Row>
     </div>
@@ -72,7 +72,7 @@ const SidebarItem = ({ item, isSelected, onItemClick }) => {
   );
 };
 
-const MainContent = ({ selectedItem }) => {
+const MainContent = ({ selectedItem, auth,setAuth  }) => {
   switch (selectedItem) {
     case "DASHBOARD":
       return <DashboardContent />;
@@ -87,7 +87,7 @@ const MainContent = ({ selectedItem }) => {
     case "BOOKINGS":
       return <Booking />;
     case "LOGOUT":
-      return <Logout />;
+      return <Logout auth={auth} setAuth={setAuth}/>;
     default:
       return <div>No component selected</div>;
   }
