@@ -1,53 +1,84 @@
-import React, { useRef } from "react";
+import React, { useState, useContext, useRef } from "react";
 import "../../styles/find-car-form.css";
 import { Form, FormGroup } from "reactstrap";
 
 import CarRentalIcon from "@mui/icons-material/CarRental";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
+import { BookingListContext } from "../../store/booking-list-store";
+import { useNavigate } from "react-router-dom";
+import DatePicker from "react-datepicker";
+import { format } from "date-fns";
+import "react-datepicker/dist/react-datepicker.css";
 
-const FindCarForm = () => {
+const FindCarForm1 = () => {
+  const { addBooking } = useContext(BookingListContext);
   const carRef = useRef(null);
   const pickupRef = useRef(null);
   const dropOffRef = useRef(null);
-  const pickUpDateTimeRef = useRef(null);
-  const dropOffDateTimeRef = useRef(null);
+  const navigate = useNavigate();
+
+  const [pickUpTime, setPickUpTime] = useState(null);
+  const [dropOffTime, setdropOffTime] = useState(null);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Car:", carRef.current.value);
-    console.log("Pick-up:", pickupRef.current.value);
-    console.log("Drop-off:", dropOffRef.current.value);
-    console.log("Pick-Up DateTime:", pickUpDateTimeRef.current.value);
-    console.log("Drop-Off DateTime:", dropOffDateTimeRef.current.value);
+    const userId = 1;
+    const carName = carRef.current.value;
+    const pickUpLocation = pickupRef.current.value;
+    const dropOffLocation = dropOffRef.current.value;
+    const pickUpDateTime = format(pickUpTime, "yyyy-MM-dd HH:mm");
+    const dropOffDateTime = format(dropOffTime, "yyyy-MM-dd HH:mm");
+
+    addBooking(
+      userId,
+      carName,
+      pickUpLocation,
+      dropOffLocation,
+      pickUpDateTime,
+      dropOffDateTime
+    );
+
+    carRef.current.value = "";
+    pickupRef.current.value = "";
+    dropOffRef.current.value = "";
+    setPickUpTime(null);
+    setdropOffTime(null);
+
+    navigate("/cart");
   };
 
   return (
-    <Form className="form" onSubmit={handleSubmit}>
-      <div className=" d-flex align-items-center justify-content-between flex-wrap">
+    <Form className="form" onSubmit={handleSubmit} style={{boxShadow : 'none'}}>
+      <div className=" d-flex align-items-center justify-content-center flex-wrap">
         <FormGroup className="form__group">
           <div className="form__label">
             <CarRentalIcon style={{ marginBottom: "4px", marginLeft: "4px" }} />
             <span>Car</span>
           </div>
           {/* <input type="text" placeholder="From address" required /> */}
-          <select ref={carRef} name="product" id="SelectCarDropdown">
+          <select ref={carRef} name="product" id="SelectCarDropdown" required>
             <option value="" selected="selected" data-select2-id="2">
               Select Car
             </option>
-            <option value="3471">Tempo Traveler(17 seats)</option>
-            <option value="3468">Etios</option>
-            <option value="3466">Ertiga</option>
-            <option value="3462">Aura</option>
-            <option value="3338">Innova</option>
-            <option value="3336">Swift Dzire</option>
-            <option value="3327">INNOVA CRYSTA</option>
-            <option value="3324">Tempo Traveler(13 seats)</option>
-            <option value="3296">Hundai Xcent</option>
+            <option value="Tempo Traveler(17 seats)">
+              Tempo Traveler(17 seats)
+            </option>
+            <option value="Etios">Etios</option>
+            <option value="Ertiga">Ertiga</option>
+            <option value="Aura">Aura</option>
+            <option value="Innova">Innova</option>
+            <option value="Swift Dzire">Swift Dzire</option>
+            <option value="INNOVA CRYSTA">INNOVA CRYSTA</option>
+            <option value="Tempo Traveler(13 seats)">
+              Tempo Traveler(13 seats)
+            </option>
+            <option value="Hundai Xcent">Hundai Xcent</option>
+            {/* <option value="3296">Hundai Xcent</option> */}
           </select>
         </FormGroup>
 
-        <FormGroup className="form__group">
+        <FormGroup className="form__group" >
           <div className="form__label">
             <LocationOnIcon
               style={{ marginBottom: "4px", marginLeft: "4px" }}
@@ -59,6 +90,7 @@ const FindCarForm = () => {
             name="pickup_loc"
             id="pickupLocDropdown"
             aria-hidden="true"
+            required
           >
             <option value="" data-select2-id="4">
               Select Location
@@ -100,6 +132,7 @@ const FindCarForm = () => {
             name="pickup_loc"
             id="pickupLocDropdown"
             aria-hidden="true"
+            required
           >
             <option value="" data-select2-id="4">
               Select Location
@@ -135,11 +168,16 @@ const FindCarForm = () => {
             />
             <span>Pick-Up</span>
           </div>
-          <input
-            ref={pickUpDateTimeRef}
-            type="datetime-local"
-            id="pickUpDateTime"
-            name="pickUpDateTime"
+          <DatePicker
+            selected={pickUpTime}
+            onChange={(date) => setPickUpTime(date)}
+            showTimeSelect
+            dateFormat="dd-MM-yyyy HH:mm"
+            timeFormat="HH:mm"
+            timeIntervals={30}
+            timeCaption="time"
+            wrapperClassName="datePicker"
+            placeholderText="dd-mm-yyyy"
           />
         </FormGroup>
 
@@ -150,20 +188,25 @@ const FindCarForm = () => {
             />
             <span>Drop-Off</span>
           </div>
-          <input
-            ref={dropOffDateTimeRef}
-            type="datetime-local"
-            id="dropOffDateTime"
-            name="dropOffDateTime"
+          <DatePicker
+            selected={dropOffTime}
+            onChange={(date) => setdropOffTime(date)}
+            showTimeSelect
+            dateFormat="dd-MM-yyyy HH:mm"
+            timeFormat="HH:mm"
+            timeIntervals={30}
+            timeCaption="time"
+            wrapperClassName="datePicker"
+            placeholderText="dd-mm-yyyy"
           />
         </FormGroup>
 
-        <FormGroup className="form__group">
-          <button className="btn find__car-btn">Find Car</button>
+        <FormGroup className="form__group" >
+          <button className="btn find__car-btn">Book Now</button>
         </FormGroup>
       </div>
     </Form>
   );
 };
 
-export default FindCarForm;
+export default FindCarForm1;

@@ -4,7 +4,7 @@ import HeroSlider from "../components/UI/HeroSlider";
 import Helmet from "../components/Helmet/Helmet";
 
 import { Container, Row, Col } from "reactstrap";
-import FindCarForm from "../components/UI/FindCarForm";
+import FindCarForm1 from "../components/UI/FindCarForm1";
 import Welcome from "../components/UI/Welcome";
 import ServicesList from "../components/UI/ServicesList";
 import CarCarousal from "../components/UI/CarCarousal";
@@ -32,7 +32,7 @@ const Home = () => {
               </Col>
 
               <Col lg="8" md="8" sm="12">
-                <FindCarForm />
+                <FindCarForm1 />
               </Col>
             </Row>
           </Container>

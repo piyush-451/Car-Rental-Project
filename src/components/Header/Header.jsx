@@ -72,7 +72,7 @@ const Header = () => {
 
             <div className="nav__right">
               <NavLink
-                to={"/home"}
+                to={"/cart"}
                 style={{
                   backgroundColor: "black",
                   color: "white",

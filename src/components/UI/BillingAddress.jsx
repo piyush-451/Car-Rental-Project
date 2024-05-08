@@ -1,5 +1,5 @@
 import React from "react";
-import { Row, Col,Button} from "reactstrap";
+import { Row, Col, Button } from "reactstrap";
 
 function BillingAddress() {
   const states = [
@@ -69,14 +69,7 @@ function BillingAddress() {
             </label>
           </Col>
           <Col sm="6" className="d-flex align-items-center">
-            <select className="form-select" id="street" required>
-              <option value="">Select State</option>
-              {states.map((state, index) => (
-                <option key={index} value={state}>
-                  {state}
-                </option>
-              ))}
-            </select>
+            <input type="text" className="form-control" id="state" required />
           </Col>
           <Col sm="6" className="d-flex align-items-center">
             <label htmlFor="city" className="form-label me-3">
@@ -94,7 +87,14 @@ function BillingAddress() {
             </label>
           </Col>
           <Col sm="6" className="d-flex align-items-center">
-            <input type="text" className="form-control" id="state" required />
+            <select className="form-select" id="street" required>
+              <option value="">Select State</option>
+              {states.map((state, index) => (
+                <option key={index} value={state}>
+                  {state}
+                </option>
+              ))}
+            </select>
           </Col>
           <Col sm="6" className="d-flex align-items-center">
             <label htmlFor="pin" className="form-label me-3">

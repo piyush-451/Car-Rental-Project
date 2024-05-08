@@ -11,6 +11,8 @@ import NotFound from "../pages/NotFound";
 import Contact from "../pages/Contact";
 import Packages from "../pages/Packages";
 import MyAccounts from "../pages/MyAccounts";
+import Cart from "../pages/Cart";
+import Checkout from "../pages/Checkout";
 
 const Routers = () => {
   return (
@@ -27,6 +29,8 @@ const Routers = () => {
       <Route path="/blogs" element={<Blog />} />
       <Route path="/blogs/:slug" element={<BlogDetails />} />
       <Route path="/contact" element={<Contact />} />
+      <Route path="/cart" element={<Cart />} />
+      <Route path="/checkout" element={<Checkout />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );

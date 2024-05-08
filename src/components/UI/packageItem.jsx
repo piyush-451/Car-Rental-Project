@@ -1,16 +1,14 @@
 import React from "react";
 import { Row, Col, Button } from "reactstrap"; // Import Button from Reactstrap
-import img1 from "../../assets/all-images/temple-img/ujjain.jpg";
-import img2 from "../../assets/all-images/temple-img/indore.jpg";
-import img3 from "../../assets/all-images/temple-img/tajmahel.jpg";
+
 import { border } from "@mui/system";
 
-const PackageItem = () => {
+const PackageItem = ({img}) => {
   return (
     <div className="card__container">
       <Row>
         <Col lg="4" md="4" sm="12">
-          <img src={img1} alt="Ujjain Temple" className="img-box" />
+          <img src={img} alt="Ujjain Temple" className="img-box" />
         </Col>
         <Col lg="4" md="4" sm="12" className="d-flex align-items-center">
           <div>
