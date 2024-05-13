@@ -13,6 +13,15 @@
   font-size: 2.8rem;
 }
 
+.form__container {
+  width: calc(
+    100% + 100px
+  ); /* Make the width 100% + padding of the parent container */
+  margin-left: -50px; /* Compensate for the parent's padding */
+  margin-right: -50px; /* Compensate for the parent's padding */
+  background-color: white;
+}
+
 .form__group {
   width: 49%;
   margin-bottom: 0;
@@ -40,8 +49,9 @@
   outline: none;
 }
 
-.form__label{
+.form__label {
   width: 50%;
+  max-width: 105px;
   min-width: 70px;
   padding: 5px;
   background-color: #efe9e9;
@@ -51,10 +61,14 @@
 
 .form {
   background: #fff;
+  width: 90%;
+  margin: auto;
   padding-top: 55px;
   padding-bottom: 50px;
   padding-left: 15px;
   padding-right: 15px;
+  /* border: 4px solid black; */
+  box-shadow: 10px 0 15px -5px rgba(0, 0, 0, 0.15),-10px 0 15px -5px rgba(0, 0, 0, 0.15);
 }
 
 .select__group {
@@ -100,6 +114,10 @@
   width: 100%;
   border: none;
   outline: none;
+}
+
+.datePicker {
+  width: 100%;
 }
 
 @media only screen and (max-width: 992px) {
