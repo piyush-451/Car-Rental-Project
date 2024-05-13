@@ -21,12 +21,14 @@ const SidebarContent = [
   "LOGOUT",
 ];
 
-const Dashboard = ({auth,setAuth}) => {
+const Dashboard = ({auth,setAuth,token}) => {
   const [selectedItem, setSelectedItem] = useState(SidebarContent[0]);
 
   const handleItemClick = (item) => {
     setSelectedItem(item);
   };
+
+  console.log(token);
 
   return (
     <div className="dashboard__container">
@@ -38,7 +40,7 @@ const Dashboard = ({auth,setAuth}) => {
         />
         </Col>
         <Col lg="7" md="7" sm="12">
-        <MainContent selectedItem={selectedItem} auth={auth} setAuth={setAuth}/>
+        <MainContent selectedItem={selectedItem} auth={auth} setAuth={setAuth} token={token}/>
         </Col>
       </Row>
     </div>
@@ -72,22 +74,22 @@ const SidebarItem = ({ item, isSelected, onItemClick }) => {
   );
 };
 
-const MainContent = ({ selectedItem, auth,setAuth  }) => {
+const MainContent = ({ selectedItem, auth,setAuth,token  }) => {
   switch (selectedItem) {
     case "DASHBOARD":
-      return <DashboardContent />;
+      return <DashboardContent token={token}/>;
     case "ORDERS":
-      return <Order />;
+      return <Order token={token}/>;
     case "DOWNLOADS":
-      return <Download />;
+      return <Download token={token}/>;
     case "ADDRESSES":
-      return <BillingAddress />;
+      return <BillingAddress token={token}/>;
     case "ACCOUNTDETAILS":
-      return <AccountDetails />;
+      return <AccountDetails token={token}/>;
     case "BOOKINGS":
-      return <Booking />;
+      return <Booking token={token}/>;
     case "LOGOUT":
-      return <Logout auth={auth} setAuth={setAuth}/>;
+      return <Logout auth={auth} setAuth={setAuth} token={token}/>;
     default:
       return <div>No component selected</div>;
   }
