@@ -4,15 +4,15 @@ import CancelIcon from "@mui/icons-material/Cancel";
 import CarDetails from "../../pages/CarDetails";
 import { Button } from "reactstrap";
 
-const CartItem = ({ car, updateBooking, deleteBooking }) => {
+const CartItem = ({ car, updateBooking, deleteBooking, display }) => {
   // console.log(car);
   const colStyles = {
-    image: { width: "8.5%" },
+    image: { width: "8.5%", display: display },
     name: { width: "50%", whiteSpace: "nowrap", overflow: "hidden" },
-    price: { width: "12.5%" },
+    price: { width: "12.5%", display: display },
     subtotal: { width: " 12.5%" },
-    actions: { width: "8.5%" }, // Assuming you have an actions column
-    btn: { width: "8.5%" }, // Assuming you have an actions column
+    actions: { width: "8.5%", display: display }, // Assuming you have an actions column
+    btn: { width: "8.5%", display: display }, // Assuming you have an actions column
   };
 
   const CarDetails = [

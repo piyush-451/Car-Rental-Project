@@ -46,6 +46,7 @@ const Cart = () => {
                     car={item}
                     updateBooking={updateBooking}
                     deleteBooking={deleteBooking}
+                    display='visible'
                   />
                 ))}
               </tbody>
