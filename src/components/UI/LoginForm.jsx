@@ -1,32 +1,56 @@
 import React, {useState} from "react";
 import {GoogleAuthProvider, getAuth, signInWithPopup} from 'firebase/auth';
+import { doSignInWithEmailAndPassword, doSignInWithGoogle } from "../../config/auth";
 
-const LoginForm = ({auth,setAuth}) => {
+const LoginForm = () => {
+
+  const [email,setEmail] = useState('');
   const [password, setPassword] = useState("");
+  const [isSigningIn,setIsSigningIn] = useState(false);
+  const [errorMessage,setErrorMessage] = useState('');
+
   const [showPassword, setShowPassword] = useState(false);
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
 
-  const loginWithGoogle = () => {
-    const auth = getAuth();
-    const provider = new GoogleAuthProvider();
-    signInWithPopup(auth,provider)
-      .then((userCred) => {
-        if(userCred){
-          setAuth(true);
-          window.localStorage.setItem('auth','true');
-        }
-      }).catch(error => {
-        console.log('Error Signing in:',error);
+  const onSubmit = (e) => {
+    e.preventDefault();
+    if(!isSigningIn){
+      setIsSigningIn(true);
+      doSignInWithEmailAndPassword(email,password)
+    }
+  }
+
+  const loginWithGoogle = async (e) => {
+    e.preventDefault();
+    if(!isSigningIn){
+      setIsSigningIn(true);
+      await doSignInWithGoogle().catch(err => {
+        setIsSigningIn(false)
       })
-  };
+    }
+  }
+
+  // const loginWithGoogle = () => {
+  //   const auth = getAuth();
+  //   const provider = new GoogleAuthProvider();
+  //   signInWithPopup(auth,provider)
+  //     .then((userCred) => {
+  //       if(userCred){
+  //         setAuth(true);
+  //         window.localStorage.setItem('auth','true');
+  //       }
+  //     }).catch(error => {
+  //       console.log('Error Signing in:',error);
+  //     })
+  // };
 
   return (
     <>
       <h3 className="heading">Login</h3>
-      <form style={{ padding: "15px" }} className="outline">
+      <form style={{ padding: "15px" }} className="outline" onSubmit={onSubmit}>
         <div className="mb-3">
           <label>Username or Email address</label>
           <span className="asterik">*</span>
@@ -34,6 +58,8 @@ const LoginForm = ({auth,setAuth}) => {
             type="email"
             className="form-control"
             required
+            value={email}
+            onChange={(e) => {setEmail(e.target.value)}}
           />
         </div>
         <div className="mb-3 password-container">
@@ -68,7 +94,7 @@ const LoginForm = ({auth,setAuth}) => {
           </button>
         </div>
         <div className="d-grid">
-          <button onClick={loginWithGoogle} className="btn btn-primary">Login With Google</button>
+          <button onClick={(e) => {loginWithGoogle(e)}} className="btn btn-primary">Login With Google</button>
         </div>
         <br />
         <p className="forgot-password text-right">

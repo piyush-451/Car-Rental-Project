@@ -15,6 +15,8 @@ const Cart = () => {
     navigate("/checkout");
   }
 
+  // useEffect(()=>{},[bookingList]);
+
   return (
     <>
       {bookingList.length === 0 ? (
