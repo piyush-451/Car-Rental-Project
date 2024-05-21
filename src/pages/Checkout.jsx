@@ -7,7 +7,8 @@ import { BookingListContext } from "../store/booking-list-store";
 import PaymentOptions from "../components/UI/PaymentOptions";
 
 const Checkout = () => {
-  const { bookingList } = useContext(BookingListContext);
+  const { bookingList ,clearAllBookings } = useContext(BookingListContext);
+
   return (
     <div className="checkout__container">
       <p className="">
@@ -48,7 +49,7 @@ const Checkout = () => {
           </tbody>
         </table>
       </div>
-      <PaymentOptions />
+      <PaymentOptions bookingList = {bookingList} clearCart = {clearAllBookings}/>
     </div>
   );
 };

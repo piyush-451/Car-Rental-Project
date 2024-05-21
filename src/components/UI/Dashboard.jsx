@@ -83,7 +83,7 @@ const MainContent = ({ selectedItem, auth,setAuth,token  }) => {
     case "DOWNLOADS":
       return <Download token={token}/>;
     case "ADDRESSES":
-      return <BillingAddress token={token}/>;
+      return <BillingAddress token={token} parent='dashboard'/>;
     case "ACCOUNTDETAILS":
       return <AccountDetails token={token}/>;
     case "BOOKINGS":

@@ -4,10 +4,12 @@ import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import Routers from "../../routers/Routers";
 import BookingListProvider from "../../store/booking-list-store";
+import ConfirmedOrdersProvider from "../../store/confirm-booking-store";
 
 const Layout = () => {
   return (
     <Fragment>
+    <ConfirmedOrdersProvider>
       <BookingListProvider>
         <Header />
         <div>
@@ -15,6 +17,7 @@ const Layout = () => {
         </div>
         <Footer />
       </BookingListProvider>
+      </ConfirmedOrdersProvider>
     </Fragment>
   );
 };

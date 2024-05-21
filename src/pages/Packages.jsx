@@ -8,6 +8,13 @@ import img3 from "../assets/all-images/temple-img/tajmahel.jpg";
 import "../styles/package.css"
 
 const Packages = () => {
+  const defaultItem = {
+    carName: "",
+    pickUpLocation: "",
+    dropOffLocation: "",
+    pickUpDateTime: "", // Use ISO format for date-time
+    dropOffDateTime: "", // Use ISO format for date-time
+  };
   return (
     <>
       <CommonSection title="Packages"/>
@@ -15,7 +22,7 @@ const Packages = () => {
       <PackageItem img={img1}/>
       <PackageItem img={img2}/>
       <PackageItem img={img3}/>
-      <FindCarForm2/>
+      <FindCarForm2 defaultItem={defaultItem}/>
       </div>
     </>
   )

@@ -1,3 +1,4 @@
+import { clear } from "@testing-library/user-event/dist/clear";
 import { useReducer, createContext } from "react";
 
 export const BookingListContext = createContext({
@@ -5,6 +6,7 @@ export const BookingListContext = createContext({
   addBooking: () => {},
   updateBooking: () => {},
   deleteBooking: () => {},
+  clearAllBookings: () => {},
 });
 
 const bookingListReducer = (currBookingList, action) => {
@@ -18,27 +20,15 @@ const bookingListReducer = (currBookingList, action) => {
   else if(action.type === "DELETE_BOOKING"){
     newBookingList = currBookingList.filter((item) => item.id!==action.payload.id);
   }
+  else if(action.type === "CLEAR_BOOKING"){
+    newBookingList = [];
+    console.log('clear')
+  }
   return newBookingList;
 };
 
 const BookingListProvider = ({ children }) => {
-  const [bookingList, dispatchBookingList] = useReducer(bookingListReducer, [{id : 1,
-    userId : 1,
-    carName : 'Tesla',
-    pickUpLocation : 'Bhopal',
-    dropOffLocation : 'Khajuraho',
-    pickUpDateTime : '2024-03-15 00:00',
-    // pickUpTime,
-    dropOffDateTime : '2024-03-15 23:59',
-},{id : 2,
-  userId : 1,
-  carName : 'bmw',
-  pickUpLocation : 'Bhopal',
-  dropOffLocation : 'Khajuraho',
-  pickUpDateTime : '2024-03-15 00:00',
-  // pickUpTime,
-  dropOffDateTime : '2024-03-15 23:59',
-}]);
+  const [bookingList, dispatchBookingList] = useReducer(bookingListReducer, []);
 
   const addBooking = (
     userId,
@@ -78,9 +68,15 @@ const BookingListProvider = ({ children }) => {
     })
   };
 
+  const clearAllBookings = () => {
+    dispatchBookingList({
+      type : "CLEAR_BOOKING",
+    })
+  }
+
   return (
     <BookingListContext.Provider
-      value={{ bookingList, addBooking, updateBooking ,deleteBooking}}
+      value={{ bookingList, addBooking, updateBooking ,deleteBooking,clearAllBookings}}
     >
       {children}
     </BookingListContext.Provider>

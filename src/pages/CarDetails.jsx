@@ -5,11 +5,20 @@ import { Container, Row, Col } from "reactstrap";
 import Helmet from "../components/Helmet/Helmet";
 import { useParams } from "react-router-dom";
 import BookingForm from "../components/UI/BookingForm";
+import FindCarForm1 from "../components/UI/FindCarForm2";
 
 const CarDetails = () => {
   const { slug } = useParams();
 
   const singleCarItem = carData.find((item) => item.carName === slug);
+
+  const defaultItem = {
+    carName: singleCarItem.carName,
+    pickUpLocation: "",
+    dropOffLocation: "",
+    pickUpDateTime: "", // Use ISO format for date-time
+    dropOffDateTime: "", // Use ISO format for date-time
+  };
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -106,12 +115,9 @@ const CarDetails = () => {
               </div>
             </Col>
 
-            <Col lg="7" className="mt-5">
-              <div className="booking-info mt-5">
-                <h5 className="mb-4 fw-bold ">Booking Information</h5>
-                <BookingForm />
-              </div>
-            </Col>
+            <div style={{margin : "100px auto" }}>
+            <FindCarForm1 defaultItem={defaultItem}/>
+            </div>
 
           </Row>
         </Container>

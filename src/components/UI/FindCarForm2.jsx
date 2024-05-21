@@ -1,6 +1,6 @@
-import React, { useState, useContext, useRef } from "react";
+import React, { useState, useContext, useRef,useEffect } from "react";
 import "../../styles/find-car-form.css";
-import { Form, FormGroup,Button } from "reactstrap";
+import { Form, FormGroup, Button } from "reactstrap";
 
 import CarRentalIcon from "@mui/icons-material/CarRental";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
@@ -10,8 +10,9 @@ import { useNavigate } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import { format } from "date-fns";
 import "react-datepicker/dist/react-datepicker.css";
+import cities from "../../assets/data/citiesData";
 
-const FindCarForm1 = () => {
+const FindCarForm1 = ({ defaultItem }) => {
   const { addBooking } = useContext(BookingListContext);
   const carRef = useRef(null);
   const pickupRef = useRef(null);
@@ -20,6 +21,17 @@ const FindCarForm1 = () => {
 
   const [pickUpTime, setPickUpTime] = useState(null);
   const [dropOffTime, setdropOffTime] = useState(null);
+
+  useEffect(() => {
+    if (defaultItem) {
+      if (defaultItem.pickUpDateTime) {
+        setPickUpTime(new Date(defaultItem.pickUpDateTime));
+      }
+      if (defaultItem.dropOffDateTime) {
+        setdropOffTime(new Date(defaultItem.dropOffDateTime));
+      }
+    }
+  }, [defaultItem]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -63,9 +75,14 @@ const FindCarForm1 = () => {
               <span>Car</span>
             </div>
             {/* <input type="text" placeholder="From address" required /> */}
-            <select ref={carRef} name="product" id="SelectCarDropdown" required>
+            <select
+              ref={carRef}
+              name="product"
+              id="SelectCarDropdown"
+              required
+            >
               <option value="" selected="selected" data-select2-id="2">
-                Select Car
+                {defaultItem.carName==="" ?  'Select Car' : defaultItem.carName}
               </option>
               <option value="Tempo Traveler(17 seats)">
                 Tempo Traveler(17 seats)
@@ -96,32 +113,17 @@ const FindCarForm1 = () => {
               name="pickup_loc"
               id="pickupLocDropdown"
               aria-hidden="true"
+              defaultValue={defaultItem?.pickUpLocation || ""}
               required
             >
               <option value="" data-select2-id="4">
-                Select Location
+              {defaultItem.pickUpLocation==="" ?  'Select Location' : defaultItem.pickUpLocation}
               </option>
-              <option value="Others">Others</option>
-              <option value="Bhopal">Bhopal</option>
-              <option value="Khajuraho">Khajuraho</option>
-              <option value="Orchha">Orchha</option>
-              <option value="Maihar">Maihar</option>
-              <option value="Rewa">Rewa</option>
-              <option value="Sagar">Sagar</option>
-              <option value="Jhansi">Jhansi</option>
-              <option value="Ashoknagar">Ashoknagar</option>
-              <option value="Guna">Guna</option>
-              <option value="Sivani">Sivani</option>
-              <option value="Balaghat">Balaghat</option>
-              <option value="Chhindwara">Chhindwara</option>
-              <option value="Pachmadhi">Pachmadhi</option>
-              <option value="Betul">Betul</option>
-              <option value="Itarsi">Itarsi</option>
-              <option value="Hoshangabad">Hoshangabad</option>
-              <option value="Ujjain">Ujjain</option>
-              <option value="Gwalior">Gwalior</option>
-              <option value="Indore">Indore</option>
-              <option value="Jabalpur">Jabalpur</option>
+              {cities.map((city, index) => (
+                <option key={index} value={city}>
+                  {city}
+                </option>
+              ))}
             </select>
           </FormGroup>
 
@@ -135,35 +137,20 @@ const FindCarForm1 = () => {
             {/* <input type="text" placeholder="From address" required /> */}
             <select
               ref={dropOffRef}
-              name="pickup_loc"
-              id="pickupLocDropdown"
+              name="dropOff_loc"
+              id="dropOffLocDropdown"
               aria-hidden="true"
+              defaultValue={defaultItem?.dropOffLocation || ""}
               required
             >
               <option value="" data-select2-id="4">
-                Select Location
+              {defaultItem.dropOffLocation==="" ?  'Select Location' : defaultItem.dropOffLocation}
               </option>
-              <option value="Others">Others</option>
-              <option value="Bhopal">Bhopal</option>
-              <option value="Khajuraho">Khajuraho</option>
-              <option value="Orchha">Orchha</option>
-              <option value="Maihar">Maihar</option>
-              <option value="Rewa">Rewa</option>
-              <option value="Sagar">Sagar</option>
-              <option value="Jhansi">Jhansi</option>
-              <option value="Ashoknagar">Ashoknagar</option>
-              <option value="Guna">Guna</option>
-              <option value="Sivani">Sivani</option>
-              <option value="Balaghat">Balaghat</option>
-              <option value="Chhindwara">Chhindwara</option>
-              <option value="Pachmadhi">Pachmadhi</option>
-              <option value="Betul">Betul</option>
-              <option value="Itarsi">Itarsi</option>
-              <option value="Hoshangabad">Hoshangabad</option>
-              <option value="Ujjain">Ujjain</option>
-              <option value="Gwalior">Gwalior</option>
-              <option value="Indore">Indore</option>
-              <option value="Jabalpur">Jabalpur</option>
+              {cities.map((city, index) => (
+                <option key={index} value={city}>
+                  {city}
+                </option>
+              ))}
             </select>
           </FormGroup>
 
@@ -204,11 +191,15 @@ const FindCarForm1 = () => {
               timeCaption="time"
               wrapperClassName="datePicker"
               placeholderText="dd-mm-yyyy"
+              defaultValue={defaultItem?.dropOffDateTime || ""}
             />
           </FormGroup>
 
-          <FormGroup className="form__group" style={{ width: "100%",marginTop : '45px'}}>
-          <Button
+          <FormGroup
+            className="form__group"
+            style={{ width: "100%", marginTop: "45px" }}
+          >
+            <Button
               style={{
                 backgroundColor: "#e9a31b",
                 padding: "10px 35px",

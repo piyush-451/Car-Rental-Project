@@ -1,11 +1,23 @@
-import React, { useState } from "react";
+import React, { useState ,useContext} from "react";
+import { useNavigate } from "react-router-dom";
 import { Button, FormGroup, Label, Input } from "reactstrap";
+import { ConfirmedOrdersContext } from "../../store/confirm-booking-store";
 
-const PaymentOptions = () => {
+const PaymentOptions = ({bookingList,clearCart}) => {
+  const {confirmOrder} = useContext(ConfirmedOrdersContext);
+
   const [selectedOption, setSelectedOption] = useState("");
+
+  const navigate = useNavigate();
 
   const handleOptionChange = (event) => {
     setSelectedOption(event.target.value);
+  };
+
+  const handlePlaceOrder = () => {
+    confirmOrder(bookingList);
+    clearCart();
+    navigate("/account");
   };
 
   const formGroupStyle = {
@@ -18,6 +30,7 @@ const PaymentOptions = () => {
     marginLeft: "10px",
     marginTop: "12px",
   };
+
 
   return (
     <div
@@ -92,6 +105,7 @@ const PaymentOptions = () => {
           padding: "10px 20px",
           borderColor: "white",
         }}
+        onClick={handlePlaceOrder}
       >
         Place Order
       </Button>
