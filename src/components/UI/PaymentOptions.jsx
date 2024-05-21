@@ -2,6 +2,7 @@ import React, { useState ,useContext} from "react";
 import { useNavigate } from "react-router-dom";
 import { Button, FormGroup, Label, Input } from "reactstrap";
 import { ConfirmedOrdersContext } from "../../store/confirm-booking-store";
+import displayRazorpay from "../../utils/PaymentGateWay";
 
 const PaymentOptions = ({bookingList,clearCart}) => {
   const {confirmOrder} = useContext(ConfirmedOrdersContext);
@@ -14,11 +15,31 @@ const PaymentOptions = ({bookingList,clearCart}) => {
     setSelectedOption(event.target.value);
   };
 
-  const handlePlaceOrder = () => {
-    confirmOrder(bookingList);
-    clearCart();
-    navigate("/account");
+  const handlePlaceOrder = async () => {
+    try {
+      // Await the displayRazorpay function to complete the payment process
+      const paymentResult = await displayRazorpay();
+  
+      if (paymentResult.success) { // Check if the payment was successful
+        // Confirm the order
+        confirmOrder(bookingList);
+  
+        // Clear the cart
+        clearCart();
+  
+        // Navigate to the account page
+        navigate("/account");
+      } else {
+        // Handle payment failure
+        console.error('Payment failed');
+        // Optionally, show a message to the user or take other actions
+      }
+    } catch (error) {
+      console.error('Error during payment process:', error);
+      // Handle any errors that occurred during the payment process
+    }
   };
+  
 
   const formGroupStyle = {
     display: "flex",
@@ -31,7 +52,7 @@ const PaymentOptions = ({bookingList,clearCart}) => {
     marginTop: "12px",
   };
 
-
+  
   return (
     <div
       style={{
