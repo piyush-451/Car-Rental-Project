@@ -1,31 +1,27 @@
 import React, { useState } from "react";
-import userData from "../../store/userstore";
+import { doCreateUserWithEmailAndPassword } from "../../config/auth";
 
-const LoginForm = () => {
+const SignUpForm = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isRegistering, setIsRegistering] = useState(false)
+  
+  // const [confirmPassword, setconfirmPassword] = useState('')
+  // const [errorMessage, setErrorMessage] = useState('')
+
   const [showPassword, setShowPassword] = useState(false);
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const newUser = {
-      id: userData.length + 1,
-      username: username,
-      email: email,
-      password: password
-    };
-    userData.push(newUser);
-    console.log(userData);
-
-    setUsername("");
-    setEmail((prev)=>"");
-    setPassword((prev)=>"");
-    // Here you can perform further actions like sending data to your backend server
+    if(!isRegistering){
+      setIsRegistering(true);
+      await doCreateUserWithEmailAndPassword(email,password)
+    }
   };
 
   return (
@@ -88,4 +84,4 @@ const LoginForm = () => {
   );
 };
 
-export default LoginForm;
+export default SignUpForm;
