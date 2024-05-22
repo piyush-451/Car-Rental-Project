@@ -49,7 +49,7 @@ const CartItem = ({ car, updateBooking, deleteBooking, display }) => {
         </td>
         <td style={colStyles.price}>1000</td>
         <td style={colStyles.subtotal}>1000</td>
-        <td style={colStyles.btn}>
+        {/* <td style={colStyles.btn}>
           <Button
             style={{
               backgroundColor: "#e9a31b",
@@ -59,7 +59,7 @@ const CartItem = ({ car, updateBooking, deleteBooking, display }) => {
           >
             UPDATE
           </Button>{" "}
-        </td>
+        </td> */}
       </tr>
     </>
   );

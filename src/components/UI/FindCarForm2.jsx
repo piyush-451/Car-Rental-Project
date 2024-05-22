@@ -81,7 +81,7 @@ const FindCarForm1 = ({ defaultItem }) => {
               id="SelectCarDropdown"
               required
             >
-              <option value="" selected="selected" data-select2-id="2">
+              <option value= {defaultItem.carName==="" ?  'Select Car' : defaultItem.carName} selected="selected" data-select2-id="2">
                 {defaultItem.carName==="" ?  'Select Car' : defaultItem.carName}
               </option>
               <option value="Tempo Traveler(17 seats)">

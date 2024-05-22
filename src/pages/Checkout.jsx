@@ -44,7 +44,7 @@ const Checkout = () => {
               >
                 <strong>TOTAL</strong>
               </td>
-              <td style={{ width: " 12.5%" }}>2000</td>
+              <td style={{ width: " 12.5%" }}>{1000*bookingList.length}</td>
             </tr>
           </tbody>
         </table>

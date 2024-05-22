@@ -66,14 +66,14 @@ const Cart = () => {
                     <span>
                       <strong>SUBTOTAL</strong>
                     </span>
-                    <span>2000</span>
+                    <span>{1000*bookingList.length}</span>
                   </div>
                   <hr className="hr-dd" />
                   <div style={{ marginLeft: "17px" }}>
                     <span>
                       <strong>Price</strong>
                     </span>
-                    <span>2000</span>
+                    <span>{1000*bookingList.length}</span>
                   </div>
                   <Button
                     style={{

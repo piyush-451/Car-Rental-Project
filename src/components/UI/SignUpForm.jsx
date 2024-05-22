@@ -60,7 +60,7 @@ const SignUpForm = () => {
             className="form-control"
             required
           />
-          <span className="toggle-password" onClick={togglePasswordVisibility}>
+          <span className="toggle-password" onClick={togglePasswordVisibility} style={{top:'80%'}}>
             <i className="fas fa-eye"></i>
           </span>
         </div>
